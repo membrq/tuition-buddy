@@ -2,5 +2,16 @@
 <div class="jumbotron">
   <h1>Welcome to Tuition Buddy!</h1>
     <p>Your open source solution for tuition management.</p>
-    <%= link_to "Register", new_user_path, class: 'btn btn-primary' %> here!
+    <% unless user_signed_in? %>
+      <%= link_to "Register", new_user_path, class: 'btn btn-primary' %> here!
+    <% end %>
+</div>
+<div class="container">
+  <div class="row">
+    <p>Use the link below to view student information.</p>
+    <% if can? :manage, :all %>
+      <%= link_to "Create Student", new_user_path, class: 'btn btn-primary' %>
+    <% end %>
+    <%= link_to "View Profile", user_path(current_user), class: 'btn btn-primary' %>
+  </div>
 </div>

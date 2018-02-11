@@ -1,17 +1,19 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+        sessions: 'users/sessions'
+      }
 
   get 'welcome/index'
 
   get 'welcome/about'
 
-  #authenticated :user do
-    #root '', as: :authenticated_root 
-  #end
+  authenticated :user do
+    root 'users#show', as: :authenticated_root
+  end
 
-  resources :users, only: [:new, :create]
-
-  #add admin routes
+  resources :users do
+    resources :requests
+  end
 
   root 'welcome#index'
 

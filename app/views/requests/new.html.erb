@@ -1,0 +1,36 @@
+<!--This page would be used by users to submit an initial request, which will then be reviewed/completed by an admin.-->
+<h2>New Request</h2>
+
+ <div class="row">
+   <div class="col-md-8">
+     <p>Complete a new reimbursement request for <%= current_user.name %>.</p>
+
+     <%= bootstrap_form_for(@request, new_user_request_path(current_user.id)) do |f| %>
+
+       <% if @request.errors.any? %>
+         <div class="alert alert-danger">
+           <h4><%= pluralize(@request.errors.count, "error") %>.</h4>
+           <ul>
+             <% @request.errors.full_messages.each do |msg| %>
+               <li><%= msg %></li>
+             <% end %>
+           </ul>
+         </div>
+       <% end %>
+
+       <%= f.fields_for :requests do |ff| %>
+       <%#= f.text_field :user_name, label: "User Name" %>
+       <%#= f.number_field :employee_id, label: "Employee ID" %>
+       <%= ff.number_field :amount_requested, label: "Amount Requested" %>
+       <%#= f.number_field :amount_paid, label: "Amount Paid" %>
+       <%#= f.date_field :date_processed, label: "Date Processed" %>
+       <%#= f.text_field :processing_status, label: "Request Status" %>
+       <%= ff.text_area :notes, label: "Describe attached documents." %>
+       <%#= f.check_box :request_approved %>
+       <%= ff.check_box :documents_submitted %>
+       <%= ff.submit "Submit Request", class: 'btn btn-success' %><br />
+<% end %>
+      </div>
+     <% end %>
+   </div>
+ </div>

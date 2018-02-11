@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col-md-8">
+    <div class="media">
+      <br />
+
+      <div class="media-body">
+        <h2 class="media-heading"><%= current_user.name %>'s Profile</h2><br />
+        <small>
+          <%#= pluralize(@users.count, 'users') %>
+        </small>
+        <table class="table table-bordered table-striped ">
+          <tbody>
+            <tr>
+              <div class="display-all-users">
+                <% if can? :manage, :all %>
+                  <%#= current_user.name %>
+                  <%#= users %>
+                  <%= "hello" %>
+                  <%= link_to "Create Request", new_user_request_path(current_user.id), class: 'btn btn-primary' %>
+                  <%# @users.each do |user| %>
+                    <%# unless user.is_admin? %>
+                      <!--<tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Employe ID</th>
+                      </tr>
+                      <tr>
+                        <td><%#= user.name %></td>
+                        <td><%#= user.employee_id %></td>
+                      </tr>-->
+                    <%# end %>
+                  <%# end %>
+                <% else %>
+                  <tr>
+                    <th>Name:</th><td><%= current_user.name %></td><br />
+                  </tr>
+                  <!--<tr>
+                    <th>Employee ID:</th><td><%#= current_user.employee_id %></td>
+                  </tr>-->
+                  <tr>
+                    <th>Email:</th><td><%= current_user.email %></td>
+                  </tr>
+                  <tr>
+                    <th>Employee Status:</th><td><%= current_user.employee_status %></td>
+                  </tr>
+                  <tr>
+                    <th>School Attending:</th><td><%= current_user.school_attending %></td>
+                  </tr>
+                  <tr>
+                    <th>Degree Type:</th><td><%= current_user.degree_type %></td>
+                  </tr>
+                  <tr>
+                    <th>Degree Program:</th><td><%= current_user.degree_program %></td>
+                  </tr>
+                  <tr>
+                    <th>Allowance:</th><td><%= current_user.allowance %></td>
+                  </tr>
+                  <tr>
+                    <th>Supervisor:</th><td><%= current_user.supervisor %></td>
+                  </tr>
+                <% end %>
+              </tr>
+            </tbody>
+          </table>
+          <br />
+
+          <% unless can? :manage, :all %>
+            <h2><%= current_user.name %>'s Requests</h2>
+            <p>Link to student's request history here.</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>

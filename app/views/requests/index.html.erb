@@ -1,0 +1,23 @@
+<!--This page shows a user's request history-->
+<div class="row">
+  <div class="col-md-8">
+    <div class="media">
+      <br />
+
+      <div class="media-body">
+        <h2 class="media-heading"><%= current_user.name %>'s Request History</h2><br />
+          <div class="display-all-requests">
+            <table class="table">
+            <% @requests.each do |request| %>
+            <tr>
+                <td scope="col">Request Number: </td><td><%= request.id %></td>
+                <td scope="col">Amount Requested: </td><td><%= request.amount_requested %></td>
+                <td scope="col">Date Processed: </td><td><%= request.date_processed %></td>
+                <td scope="col"><%= link_to "View Request", user_request_path(request.user, request), class: 'btn btn-info btn-sm' %></td><br />
+            </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>

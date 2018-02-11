@@ -20,6 +20,9 @@ gem 'jbuilder', '~> 2.5'
  gem 'bcrypt', '~> 3.1.7'
  gem 'devise'
  gem 'cancan'
+ gem "bootstrap_form",
+    git: "https://github.com/bootstrap-ruby/bootstrap_form.git",
+    branch: "master"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

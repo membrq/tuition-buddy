@@ -1,23 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe Request, type: :model do
-
-
-  describe "attributes" do
-    # amount requested
-
-    # date processed
-
-    # docs submitted
-
-    # process status
-
-    # amount paid
-
-    # notes
-
-    # approval
-
-    # references user
-  end
+RSpec.describe User, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end
