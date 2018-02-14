@@ -5,7 +5,7 @@
    <div class="col-md-8">
      <p>Complete a new reimbursement request for <%= current_user.name %>.</p>
 
-     <%= bootstrap_form_for(@request, new_user_request_path(current_user.id)) do |f| %>
+     <%= bootstrap_form_for(@request, url: new_request_path) do |f| %>
 
        <% if @request.errors.any? %>
          <div class="alert alert-danger">
@@ -19,18 +19,18 @@
        <% end %>
 
        <%= f.fields_for :requests do |ff| %>
-       <%#= f.text_field :user_name, label: "User Name" %>
-       <%#= f.number_field :employee_id, label: "Employee ID" %>
-       <%= ff.number_field :amount_requested, label: "Amount Requested" %>
-       <%#= f.number_field :amount_paid, label: "Amount Paid" %>
-       <%#= f.date_field :date_processed, label: "Date Processed" %>
-       <%#= f.text_field :processing_status, label: "Request Status" %>
-       <%= ff.text_area :notes, label: "Describe attached documents." %>
-       <%#= f.check_box :request_approved %>
-       <%= ff.check_box :documents_submitted %>
-       <%= ff.submit "Submit Request", class: 'btn btn-success' %><br />
-<% end %>
-      </div>
+         <%#= f.text_field :user_name, label: "User Name" %>
+         <%= f.text_field :user_id, label: "User ID" %>
+         <%#= f.number_field :employee_id, label: "Employee ID" %>
+         <%= ff.number_field :amount_requested, label: "Amount Requested" %>
+         <%= f.number_field :amount_paid, label: "Amount Paid" %>
+         <%= f.date_field :date_processed, label: "Date Processed" %>
+         <%= f.text_field :processing_status, label: "Request Status" %>
+         <%= ff.text_area :notes, label: "Describe attached documents." %>
+         <%= f.check_box :request_approved %>
+         <%= ff.check_box :documents_submitted %>
+         <%= ff.submit "Submit Request", class: 'btn btn-success' %><br />
+       <% end %>
      <% end %>
    </div>
  </div>

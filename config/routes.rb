@@ -3,17 +3,21 @@ Rails.application.routes.draw do
         sessions: 'users/sessions'
       }
 
-  get 'welcome/index'
-
   get 'welcome/about'
 
   authenticated :user do
     root 'users#show', as: :authenticated_root
   end
 
-  resources :users do
-    resources :requests
+  unauthenticated :user do
+    get 'welcome/intro', as: :unauthenticated_root
   end
+
+  resources :users do
+    resources :requests, except: [:new]
+  end
+
+  resources :requests, only: [:new]
 
   root 'welcome#index'
 

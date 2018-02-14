@@ -7,11 +7,14 @@
     <% end %>
 </div>
 <div class="container">
+
   <div class="row">
-    <p>Use the link below to view student information.</p>
-    <% if can? :manage, :all %>
-      <%= link_to "Create Student", new_user_path, class: 'btn btn-primary' %>
-    <% end %>
+    <h3>Get started here!</h3>
+    <p>Use this link to go to student profiles. Users have access to their personal profile only. Admins have access to all user profiles.</p><br />
     <%= link_to "View Profile", user_path(current_user), class: 'btn btn-primary' %>
+  </div><br />
+  <div class="row">
+    <h3>Want to learn more?</h3>
+    <p>For more information about the user vs. admin workflows, go to the <a href="about">About</a> page.</p>
   </div>
 </div>

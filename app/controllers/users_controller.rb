@@ -25,6 +25,7 @@ class UsersController < ApplicationController
    end
 
    def show
+     @users = User.all
      @user = User.find_by_id(:id)
    end
 
@@ -47,7 +48,7 @@ class UsersController < ApplicationController
       @user = User.find_by_id(:id)
 
       if @user.destroy
-        flash[:notice] = "User was deleted."
+        flash[:notice] = "User was deleted. Bye Felicia!"
         redirect_to :create
       else
         flash[:alert] = "User was not deleted. Try again."

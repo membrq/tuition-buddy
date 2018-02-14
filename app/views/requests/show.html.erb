@@ -4,7 +4,12 @@
       <br />
 
       <div class="media-body">
-        <h2 class="media-heading"><%= current_user.name %>'s Request</h2><br />
+        <% if can? :manage, :all %>
+          
+        <% else %>
+          <h2 class="media-heading"><%= current_user.name %>'s Request</h2><br />
+        <% end %>
+
         <table class="table table-bordered table-striped ">
           <tbody>
             <tr>

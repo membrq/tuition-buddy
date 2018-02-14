@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 #  protect_from_forgery with: :exception
-  before_action :authenticate_user!
+  #before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
 #  include Pundit
@@ -9,7 +9,15 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def require_sign_in #what would this need to redirect from?
+  def after_sign_in_path_for(resource)
+    authenticated_root_path
+  end
+
+  def after_sign_out_path_for(resource)
+    unauthenticated_root_path 
+  end
+
+  def require_sign_in
     unless current_user
       flash[:alert] = "You must be logged in to do that!"
       redirect_to new_user_path

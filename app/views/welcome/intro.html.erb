@@ -1,0 +1,28 @@
+<br>
+<div class="jumbotron">
+  <h1>Welcome to Tuition Buddy!</h1><br />
+    <p>Your open source solution for tuition management.</p><br />
+    <% unless user_signed_in? %>
+      <%= link_to "Register", new_user_path, class: 'btn btn-primary' %>
+    <% end %>
+</div>
+<div class="container">
+
+  <div class="row">
+    <h4>Background</h4>
+    <p>Tuition Buddy was inspired by personal work experiences where the need for software was vital. But there were budget constraints. So I started building the software I wish I had. There's a lot more in store for this project so stay tuned! </p>
+  </div><br />
+  <div class="row">
+    <h4>Features</h4>
+    <ul>
+      <li>Admins can view all user profiles and user requests.</li>
+      <li>Admins can create requests for users.</li>
+      <li>Users can create an account and view their request history.</li>
+      <!--review describe more features-->
+    </ul>
+  </div><br />
+  <div class="row">
+    <h4>Want to learn more?</h4>
+    <p>Go to the <a href="about">About</a> page for more information about the user and admin work flows.</p>
+  </div>
+</div>

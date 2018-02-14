@@ -1,8 +1,9 @@
 class RequestsController < ApplicationController
 
   def index
-    @requests = Request.all
-    #@requests = Request.visible_to(current_user)
+    @user = User.find(params[:user_id])
+    @requests = @user.requests.all(request_params)
+    #@requests = @user.requests.all
   end
 
   def new
@@ -24,6 +25,7 @@ class RequestsController < ApplicationController
   end
 
   def show
+    #@request = Request.new
     @user = User.find(params[:user_id])
     @request = Request.find(params[:id])
   end
@@ -54,15 +56,13 @@ class RequestsController < ApplicationController
       redirect_to [@user]
     else
       flash[:alert] = "Request was not deleted. Try again."
-      redirect_to [@user] 
+      redirect_to [@user]
     end
   end
 
   private
 
   def request_params
-    params.require(:request).permit(:id, :amount_requested, :amount_paid, :notes,
-    :date_processed, :documents_submitted, :processing_status, :request_approved,
-    :user_id)
+    params.permit(:id, :user_id)
   end
 end
