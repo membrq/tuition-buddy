@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
-        sessions: 'users/sessions'
+        sessions: 'users/sessions',
+        registrations: 'registrations'
       }
 
   get 'welcome/about'
 
   authenticated :user do
-    root 'users#show', as: :authenticated_root
+    root 'welcome#index', as: :authenticated_root
   end
 
   unauthenticated :user do

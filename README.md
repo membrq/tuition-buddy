@@ -1,11 +1,17 @@
 # Tuition Buddy
 
-Tuition Buddy is an open source tuition management system. It was inspired by personal work experiences where the need for software was vital. But there were budget constraints. So I started building the software I wish I had. I hope it will evolve and be useful to others.
+## About
+Tuition Buddy is a management system for companies that provide a tuition reimbursement benefit for their employees. It's built for two user groups: admins and users/employees. Admins can view and edit all user profiles and reimbursement requests. Users can view their personal profiles and request histories.
 
-Project Status: WIP. Launch date TBD.
+Future updates to include a front-end redesign and more functionality for admins and users (ex: reports, analytics, file uploads).
 
-View the application live on Heroku: TBD.
+## Specs
+Version: BETA
+Ruby: 2.5.0
+Rails: 5.1.4
 
+## Demo
+View the app live on [Heroku](https://tuition-buddy.herokuapp.com/).
 
 ## Contributing
 If you'd like to contribute to the project, check out the CONTRIBUTING.md file for more information.

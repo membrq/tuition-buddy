@@ -4,6 +4,7 @@ FactoryBot.define do
   end
 
   factory :user do
+    id 1
     name "Basic User"
     email
     password "basicuser"
@@ -21,8 +22,4 @@ FactoryBot.define do
     confirmed_at {Time.now}
     is_admin  true
   end
-
-  #after(:create) do |user|
-  #  user.save!
-  #end
 end

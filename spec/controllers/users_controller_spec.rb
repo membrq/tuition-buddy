@@ -2,98 +2,113 @@ require 'rails_helper'
 #include Devise::Test::ControllerHelpers
 
 RSpec.describe UsersController, :type => :controller do
-  before :each do
-    user = create(:user)
-  #  sign_in user
-    #login_user
+  #new method
+  describe "GET #new" do
+    it "returns http success" do
+      expect(response).to have_http_status(:success)
+    end
+
+    it "instantiates a new user" do
+      expect(:user).to_not be_nil
+    end
   end
-  #let(:user){create(:user)}
 
-  #context for not signed in user?
+  #create method
+  describe "POST #create" do
+    before :each do
+      post :create, params:{ user: {name: "Bob", email: "bob@email.com", password: "blah", password_confirmation: "blah"}}
+    end
 
-  context "user is signed in" do
-      #login_user
+    it "returns http success" do
+      expect(response).to have_http_status(:success)
+    end
 
-    #new method
-    describe "GET #new" do
-      it "returns http success" do
-        expect(response).to have_http_status(:success)
+    it "logs the user in after sign up" do
+      expect(session[:user_id]).to eq assigns(:user).id
+    end
+  end
+
+  #show method
+  describe 'GET #show' do
+    let(:factory_user) {create(:user)}
+
+    before :each do
+      sign_in factory_user
+      get :show, params: {id: factory_user.id}
+    end
+
+    it "returns http success" do
+      expect(response).to have_http_status(:success)
+    end
+
+    it "renders the #show view" do
+      expect(response).to render_template(:show)
+    end
+
+    it "finds the right user" do
+      expect(assigns(:user)).to eq(factory_user)
+    end
+  end
+
+  #edit method
+  describe 'GET #edit' do
+    let(:factory_user) {create(:user)}
+
+    before :each do
+      sign_in factory_user
+      get :edit, params: {id: factory_user.id}
+    end
+
+    it "returns http success" do
+      expect(response).to have_http_status(:success)
+    end
+
+    it "finds the right user" do
+      expect(assigns(:user)).to eq(factory_user)
+    end
+
+    it "renders the #edit view" do
+      expect(response).to render_template(:edit)
+    end
+  end
+
+  #update method
+  describe 'PUT #update' do
+    let(:factory_user) {create(:user)}
+
+    before :each do
+      sign_in factory_user
+      put :update, params: {id: factory_user.id}#, factory_user: attributes_for(:factory_user, name: "Test")}
+    end
+
+    #it "finds the right user" do
+    #  expects(assigns(:user)).to eq(factory_user)
+    #end
+
+    it "updates user with expected attributes" do
+        new_name = "Bob"
+        #new_body = RandomData.random_paragraph
+
+        put :update, params: {id: factory_user.id, user: {name: new_name}}
+
+        updated_user = assigns(:user)
+        expect(updated_user.id).to eq(factory_user.id)
+        expect(updated_user.name).to eq(new_name)
+        #expect(updated_user.body).to eq new_body
       end
 
-      it "instantiates a new user" do
-        expect(:user).to_not be_nil
-      end
+    it "returns http success" do
+      expect(response).to have_http_status(:success)
     end
 
-    #create method
-    describe "POST #create" do
-      #let(:user){create(:user)}
-
-      it "returns an http redirect" do
-        post :create
-        expect(response).to have_http_status(:redirect)
-      end
-
-      it "sets user properly" do #or test each user attribute?
-        post :create
-        expect(assigns(:user)).to eq user
-      end
-
-      #redirect for user.save #same as http redirect
-      #redirect for failed save
+    it "redirects to the correct path" do
+      expect(response).to redirect_to([factory_user])
     end
 
+#    it "changes the right user attributes" do
+    #  expect(user.name).to eq("Test")
+#    end
 
-    #show method
-    describe 'GET #show' do
 
-    #  it "renders the #show view" do
-    #    get :show, params: {id: user.id}
-    #    expect(response).to render_template(:show)
-    #  end
-
-      #it "finds the right user" do
-      #  get :show#, {id: @user.id}
-      #  expect(assigns(:user)).to eq(user)
-      #end
-    end
-
-    #edit method
-    describe 'GET #edit' do
-  #    it "finds the right user" do
-    #    get :edit, id: user.id
-    #    expects(assigns(:user)).to eq user
-  #    end
-    end
-
-    #update method
-    describe 'PATCH #update' do
-    #  before :each do
-    #    get :update, id: user.id, user: attributes_for(:user, name: "Test")
-    #  end
-
-  #    it "finds the right user" do
-      #  expects(assigns(:user)).to eq user
-  #    end
-
-  #    it "changes the right user attributes" do
-      #  expect(user.name).to eq "Test"
-  #    end
-
-  #    it "redirects to show" do #only when update is successful
-      #  expect(response).to redirect_to(user_path(user))
-  #    end
-
-  #    it "shows successful flash message" do #only when update is successful
-      #  expect(flash[:notice]).to eq "Update was successful!"
-  #    end
-    end
-
-    #destroy method
-    describe 'DELETE #destroy' do
-
-    end
-
-    #context when user is admin--in view spec
   end
 end

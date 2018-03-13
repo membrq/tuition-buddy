@@ -5,43 +5,43 @@
 
       <div class="media-body">
         <% if can? :manage, :all %>
-          <h2 class="media-heading"><%= current_user.name %>'s View</h2><br />
+          <h2 class="media-heading">All Users</h2><br />
             <p>This page shows admin users all employees who are registered in the system.</p>
         <% else %>
           <h2 class="media-heading"><%= current_user.name %>'s Profile</h2><br />
         <% end %>
 
-        <table class="table table-bordered table-striped ">
-              <div class="display-all-users">
-                <% if can? :manage, :all %>
-                  <%= link_to "Create Request", new_request_path, class: 'btn btn-success' %><br />
+        <% if can? :manage, :all %>
+          <%#= link_to "Create Request", new_request_path, class: 'btn btn-success' %><br />
 
-                  <% @users.each do |user| %>
-                    <% unless user.is_admin? %>
-                      <thead>
-                        <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Employee ID</th>
-                        <th scope="col">Requests</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr>
-                        <td><%= user.name %></td>
-                        <td><%#= user.employee_id %></td>
-                        <td><%= link_to "View Requests", user_requests_path(user.id),  class: 'btn btn-primary' %></td>
-                      </tr>
-                    </tbody>
-                    <% end %>
-                  <% end %>
-                <% else %>
+          <table class="table table-bordered table-striped ">
+            <div class="display-all-users">
+              <% @users.each do |user| %>
+                <% unless user.is_admin? %>
+                  <thead>
+                    <tr>
+                      <th scope="col">Name</th>
+                      <th scope="col">Employee ID</th>
+                      <th scope="col">Requests</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><%= user.name %></td>
+                      <td><%= user.employee_id %></td>
+                      <td><%= link_to "View Requests", user_requests_path(user.id),  class: 'btn btn-primary' %></td>
+                    </tr>
+                  </tbody>
+                <% end %>
+              <% end %>
+              <% else %>
                 <tbody>
                   <tr>
                     <th>Name:</th><td><%= current_user.name %></td><br />
                   </tr>
-                  <!--<tr>
-                    <th>Employee ID:</th><td><%#= current_user.employee_id %></td>
-                  </tr>-->
+                  <tr>
+                    <th>Employee ID:</th><td><%= current_user.employee_id %></td>
+                  </tr>
                   <tr>
                     <th>Email:</th><td><%= current_user.email %></td>
                   </tr>
@@ -58,7 +58,7 @@
                     <th>Degree Program:</th><td><%= current_user.degree_program %></td>
                   </tr>
                   <tr>
-                    <th>Allowance:</th><td><%= current_user.allowance %></td>
+                    <th>Allowance:</th><td><%= number_to_currency(current_user.allowance) %></td>
                   </tr>
                   <tr>
                     <th>Supervisor:</th><td><%= current_user.supervisor %></td>
@@ -70,7 +70,8 @@
 
           <% unless can? :manage, :all %>
             <h2><%= current_user.name %>'s Requests</h2>
-            <p>Link to student's request history here.</p>
+            <p>Click on this link to view your request history.</p>
+            <%= link_to "View Requests", user_requests_path(current_user.id),  class: 'btn btn-primary' %>
           <% end %>
         </div>
       </div>

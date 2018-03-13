@@ -6,12 +6,16 @@
       <%= link_to "Register", new_user_path, class: 'btn btn-primary' %> here!
     <% end %>
 </div>
-<div class="container">
+<div class="container-fluid">
 
   <div class="row">
     <h3>Get started here!</h3>
-    <p>Use this link to go to student profiles. Users have access to their personal profile only. Admins have access to all user profiles.</p><br />
-    <%= link_to "View Profile", user_path(current_user), class: 'btn btn-primary' %>
+    <p>Use the link below to go to student profiles. Users can view their personal profile only. Admins can view all users in the system.</p><br />
+    <% if can? :manage, :all %>
+      <%= link_to "View Profiles", user_path(current_user), class: 'btn btn-primary' %>
+    <% else %>
+      <%= link_to "View Profile", user_path(current_user), class: 'btn btn-primary' %>
+    <% end %>
   </div><br />
   <div class="row">
     <h3>Want to learn more?</h3>

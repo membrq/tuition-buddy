@@ -5,19 +5,39 @@
       <br />
 
       <div class="media-body">
-        <h2 class="media-heading"><%= current_user.name %>'s Request History</h2><br />
+        <% if can? :manage, :all %>
+          <h2 class="media-heading">All Requests</h2><br />
+            <p>This page shows admin users all requests that have been made in the system.</p>
+
           <div class="display-all-requests">
-            <table class="table">
-            <% @requests.each do |request| %>
-            <tr>
-                <td scope="col">Request Number: </td><td><%= request.id %></td>
-                <td scope="col">Amount Requested: </td><td><%= request.amount_requested %></td>
-                <td scope="col">Date Processed: </td><td><%= request.date_processed %></td>
-                <td scope="col"><%= link_to "View Request", user_request_path(request.user, request), class: 'btn btn-info btn-sm' %></td><br />
-            </tr>
-            <% end %>
-          </table>
-        </div>
+            <table class="table table-striped">
+              <% @all_requests.each do |request| %>
+                <tr>
+                  <td scope="col">Request Number: </td><td><%= request.id %></td>
+                  <td scope="col">Amount Requested: </td><td><%= number_to_currency(request.amount_requested) %></td>
+                  <td scope="col">Date Processed: </td><td><%= request.date_processed %></td>
+                  <td scope="col"><%= link_to "View Request", user_request_path(request.user, request), method: :get, class: 'btn btn-info btn-sm' %></td><br />
+                </tr>
+                <% end %>
+              </table>
+            </div>
+        <% else %>
+          <h2 class="media-heading"><%= current_user.name %>'s Request History</h2><br />
+          <div class="display-all-user-requests">
+            <%= link_to "Create Request", new_request_path, class: 'btn btn-success' %>
+
+            <table class="table table-striped">
+              <% @user_requests.each do |request| %>
+                <tr>
+                  <td scope="col">Request Number: </td><td><%= request.id %></td>
+                  <td scope="col">Amount Requested: </td><td><%= number_to_currency(request.amount_requested) %></td>
+                  <td scope="col">Date Processed: </td><td><%= request.date_processed %></td>
+                  <td scope="col"><%= link_to "View Request", user_request_path(request.user, request), method: :get, class: 'btn btn-info btn-sm' %></td><br />
+                </tr>
+              <% end %>
+            </table>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

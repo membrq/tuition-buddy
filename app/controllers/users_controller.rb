@@ -26,15 +26,15 @@ class UsersController < ApplicationController
 
    def show
      @users = User.all
-     @user = User.find_by_id(:id)
+     @user = User.find_by_id(params[:id])
    end
 
    def edit
-     @user = User.find_by_id(:id)
+     @user = User.find_by_id(params[:id])
    end
 
    def update
-     @user = User.find(params[:id])
+     @user = User.find_by_id(params[:id]) #instead of .find(params[:id])
 
      if @user.update(user_params)
        redirect_to @user, notice: "Update was successful!"
@@ -44,22 +44,15 @@ class UsersController < ApplicationController
      end
    end
 
-   def destroy
-      @user = User.find_by_id(:id)
-
-      if @user.destroy
-        flash[:notice] = "User was deleted. Bye Felicia!"
-        redirect_to :create
-      else
-        flash[:alert] = "User was not deleted. Try again."
-        redirect_to [@user] #revise path?
-      end
-   end
-
    private
 
    # Only allow a trusted parameter "white list" through.
    def user_params
-     params.require(:user).permit(:id, :name, :email, :password)
+     #debugger
+     params.require(:user).permit(:id, :name, :email, :password, :username,
+       :allowance, :supervisor, :employee_status, :school_attending,
+       :degree_type, :degree_program, :eligibility, :request => [:id,
+       :amount_requested, :amount_paid, :date_processed, :processing_status,
+       :notes, :request_approved, :documents_submitted])
    end
 end

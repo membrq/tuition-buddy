@@ -1,9 +1,10 @@
 class RequestsController < ApplicationController
 
   def index
+    @users = User.all
     @user = User.find(params[:user_id])
-    @requests = @user.requests.all(request_params)
-    #@requests = @user.requests.all
+    @all_requests = Request.all
+    @user_requests = @user.requests.all
   end
 
   def new
@@ -25,7 +26,6 @@ class RequestsController < ApplicationController
   end
 
   def show
-    #@request = Request.new
     @user = User.find(params[:user_id])
     @request = Request.find(params[:id])
   end
@@ -63,6 +63,7 @@ class RequestsController < ApplicationController
   private
 
   def request_params
-    params.permit(:id, :user_id)
+    params.require(:request).permit(:id, :user_id, :amount_requested, :amount_paid, :date_processed,
+    :processing_status, :notes, :request_approved, :documents_submitted)
   end
 end
