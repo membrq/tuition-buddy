@@ -34,7 +34,11 @@
                   </tbody>
                 <% end %>
               <% end %>
-              <% else %>
+            </div>
+          </table>
+          <% else %>
+            <table class="table table-bordered table-striped ">
+              <div class="display-user-profile">
                 <tbody>
                   <tr>
                     <th>Name:</th><td><%= current_user.name %></td><br />
@@ -58,14 +62,15 @@
                     <th>Degree Program:</th><td><%= current_user.degree_program %></td>
                   </tr>
                   <tr>
-                    <th>Allowance:</th><td><%= number_to_currency(current_user.allowance) %></td>
+                    <th>Annual Allowance:</th><td><%= number_to_currency(current_user.allowance) %></td>
                   </tr>
                   <tr>
                     <th>Supervisor:</th><td><%= current_user.supervisor %></td>
                   </tr>
                 </tbody>
-                <% end %>
-          </table>
+              </div>
+            </table>
+          <% end %>
           <br />
 
           <% unless can? :manage, :all %>
