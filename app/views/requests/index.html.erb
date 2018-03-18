@@ -25,7 +25,7 @@
         <% else %>
           <h2 class="media-heading"><%= current_user.name %>'s Request History</h2><br />
           <div class="display-all-user-requests">
-            <%= link_to "Create Request", new_request_path, class: 'btn btn-success' %>
+            <%= link_to "Create Request", new_request_path, class: 'btn btn-success' %><br />
 
             <table class="table table-striped">
               <% @user_requests.each do |request| %>

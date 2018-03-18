@@ -15,22 +15,22 @@
             <tr>
               <div class="display-current-user-requests">
                 <tr>
-                  <th>User ID</th><td><%= @request.user_id %></td><br />
+                  <th>User ID</th><td><%= @request.user_id %></td>
                 </tr>
                 <tr>
-                  <th>Request Number</th><td><%= @request.id %></td><br />
+                  <th>Request Number</th><td><%= @request.id %></td>
                 </tr>
                 <tr>
-                  <th>Amount Requested</th><td><%= number_to_currency(@request.amount_requested) %></td><br />
+                  <th>Amount Requested</th><td><%= number_to_currency(@request.amount_requested) %></td>
                 </tr>
                 <tr>
-                  <th>Amount Paid</th><td><%= number_to_currency(@request.amount_paid) %></td><br />
+                  <th>Amount Paid</th><td><%= number_to_currency(@request.amount_paid) %></td>
                 </tr>
                 <tr>
-                  <th>Date Processed</th><td><%= @request.date_processed %></td><br />
+                  <th>Date Processed</th><td><%= @request.date_processed %></td>
                 </tr>
                 <tr>
-                  <th>Notes</th><td><%= @request.notes %></td><br />
+                  <th>Notes</th><td><%= @request.notes %></td>
                 </tr>
                 <tr>
                   <th>Documents Submitted</th>
@@ -42,7 +42,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <th>Processing Status</th><td><%= @request.processing_status %></td><br />
+                  <th>Processing Status</th><td><%= @request.processing_status %></td>
                 </tr>
                 <tr>
                   <th>Request Approved</th>
@@ -51,7 +51,7 @@
                   <% else %>
                     <%= "No" %>
                   <% end %>
-                </tr><br />
+                </tr>
               </div>
             </tr>
           </tbody>
