@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'welcome/about'
 
   authenticated :user do
-    root 'welcome#index', as: :authenticated_root
+    get 'welcome/index', as: :authenticated_root
   end
 
   unauthenticated :user do
