@@ -17,13 +17,12 @@
          </div>
        <% end %>
 
-       <%#= bootstrap_form_for(@user, url: create_user_path) do |f| %>
-         <%= f.text_field :name, label: "Name" %>
-         <%= f.email_field :email, label: "Email" %>
-         <%= f.password_field :password, label: "Password" %>
-         <%= f.password_field :password_confirmation, label: "Confirm Password" %>
-         <%= f.submit "Register", class: 'btn btn-success' %>
-       </div>
-     <% end %>
+       <%= f.text_field :name, label: "Name" %>
+       <%= f.email_field :email, label: "Email" %>
+       <%= f.password_field :password, label: "Password" %>
+       <%= f.password_field :password_confirmation, label: "Confirm Password" %>
+       <%= f.submit "Register", class: 'btn btn-success' %>
+     </div>
+    <% end %>
    </div>
  </div>

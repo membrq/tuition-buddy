@@ -3,6 +3,6 @@ class Request < ApplicationRecord
 
   default_scope { order('created_at DESC') }
 
-  validates_presence_of :user_id #add more?
+  validates_presence_of :user_id 
 
 end

@@ -3,12 +3,9 @@
   <head>
     <title>Tuition Buddy</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <%= stylesheet_link_tag    "application", media: "all" %>
-    <%= javascript_include_tag "application" %>
-    <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+      <%= csrf_meta_tags %>
   </head>
 
   <body>
@@ -32,10 +29,18 @@
           <% if user_signed_in? %>
             Logged in as <strong><%= current_user.name %></strong> - <%= link_to "Sign Out", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
           <% else %>
-            <%= link_to "Sign In", new_user_session_path %> <!--should not route to log in page-->
+            <%= link_to "Sign In", new_user_session_path %>
           <% end %>
         </div>
       </ul>
+
+      <div class="container">
+        <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %>">
+            <%= value %>
+          </div>
+        <% end %>
+      </div>
 
       <%= yield %>
     </div>

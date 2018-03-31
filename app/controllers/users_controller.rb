@@ -34,7 +34,7 @@ class UsersController < ApplicationController
    end
 
    def update
-     @user = User.find_by_id(params[:id]) #instead of .find(params[:id])
+     @user = User.find_by_id(params[:id])
 
      if @user.update(user_params)
        redirect_to @user, notice: "Update was successful!"
@@ -48,7 +48,6 @@ class UsersController < ApplicationController
 
    # Only allow a trusted parameter "white list" through.
    def user_params
-     #debugger
      params.require(:user).permit(:id, :name, :email, :password, :username,
        :allowance, :supervisor, :employee_status, :school_attending,
        :degree_type, :degree_program, :eligibility, :request => [:id,

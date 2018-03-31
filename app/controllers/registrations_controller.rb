@@ -1,11 +1,8 @@
 class RegistrationsController < Devise::RegistrationsController
   protected
 
-  #def after_sign_up_path_for(resource)
-  #  authenticated_root_path
-  #end
-
   def after_inactive_sign_up_path_for(resource)
-    authenticated_root_path
+    flash[:notice] = "Confirm your account to sign in!"
+    unauthenticated_root_path
   end
 end
